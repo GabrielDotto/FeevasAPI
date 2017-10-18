@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeevasApi", "FeevasApi\FeevasApi.csproj", "{7FE8A444-15D0-45BE-9713-C1667155CA4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteProg4", "SiteProg4\SiteProg4.csproj", "{FA0D6063-25AD-4E5C-A52E-BF71330DDF63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{7FE8A444-15D0-45BE-9713-C1667155CA4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FE8A444-15D0-45BE-9713-C1667155CA4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FE8A444-15D0-45BE-9713-C1667155CA4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA0D6063-25AD-4E5C-A52E-BF71330DDF63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA0D6063-25AD-4E5C-A52E-BF71330DDF63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA0D6063-25AD-4E5C-A52E-BF71330DDF63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA0D6063-25AD-4E5C-A52E-BF71330DDF63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C1B4E5F-134B-4D62-9426-1547A34550A0}
 	EndGlobalSection
 EndGlobal

@@ -86,6 +86,7 @@ namespace FeevasApi.Controllers
         }
 
         // DELETE: api/Usuarios/5
+        [Authorize(Roles = "Admin")]
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult DeleteUsuario(int id)
         {
@@ -94,7 +95,10 @@ namespace FeevasApi.Controllers
             {
                 return NotFound();
             }
-
+            //db.Log.Add(new Log() {
+            //    Acao = "Delete",
+            //    Data = DateTime.Now,
+            //    Usuario})
             db.Usuario.Remove(usuario);
             db.SaveChanges();
 
