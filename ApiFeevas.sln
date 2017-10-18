@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeevasApi", "FeevasApi\FeevasApi.csproj", "{7FE8A444-15D0-45BE-9713-C1667155CA4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteProg4", "SiteProg4\SiteProg4.csproj", "{FA0D6063-25AD-4E5C-A52E-BF71330DDF63}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trab1Prog4", "Trab1Prog4\Trab1Prog4.csproj", "{24DF0325-983F-4AA6-9426-06EED31C96F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{7FE8A444-15D0-45BE-9713-C1667155CA4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FE8A444-15D0-45BE-9713-C1667155CA4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FE8A444-15D0-45BE-9713-C1667155CA4A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA0D6063-25AD-4E5C-A52E-BF71330DDF63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA0D6063-25AD-4E5C-A52E-BF71330DDF63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA0D6063-25AD-4E5C-A52E-BF71330DDF63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA0D6063-25AD-4E5C-A52E-BF71330DDF63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24DF0325-983F-4AA6-9426-06EED31C96F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24DF0325-983F-4AA6-9426-06EED31C96F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24DF0325-983F-4AA6-9426-06EED31C96F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24DF0325-983F-4AA6-9426-06EED31C96F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
