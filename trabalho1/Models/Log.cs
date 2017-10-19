@@ -9,6 +9,8 @@ namespace trabalho1.Models
     {
         public int Id { get; set; }
         public string Acao { get; set; }
+        public ApplicationUser Usuario { get; set; }
+        public DateTime Data { get; set; }
     }
 
 }

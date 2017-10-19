@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace trabalho1.Controllers
 {
-    [Authorize(Roles = "Admin,User")]
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

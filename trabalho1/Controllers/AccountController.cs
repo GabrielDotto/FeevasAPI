@@ -17,7 +17,7 @@ namespace trabalho1.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private LogsController _logController = new LogsController();
         public AccountController()
         {
         }
@@ -155,6 +155,11 @@ namespace trabalho1.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    _logController.Create(new Log() {
+                                            Acao = "Registrou-se",
+                                            Usuario = user,
+                                            Data = DateTime.Now });
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
