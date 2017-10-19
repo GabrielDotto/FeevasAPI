@@ -194,3 +194,6 @@ C:\Feevale\FeevasAPI\trabalho1\obj\Debug\trabalho1.pdb
 C:\Feevale\FeevasAPI\trabalho1\obj\Debug\trabalho1.Migrations.InitialCreate.resources
 C:\Feevale\FeevasAPI\trabalho1\obj\Debug\trabalho1.csproj.GenerateResource.Cache
 C:\Feevale\FeevasAPI\trabalho1\obj\Debug\trabalho1.Migrations.UPDATE_1.resources
+D:\Projetos\Feevale\FeevasAPI\trabalho1\obj\Debug\trabalho1.Migrations.InitialCreate.resources
+D:\Projetos\Feevale\FeevasAPI\trabalho1\obj\Debug\trabalho1.Migrations.UPDATE_1.resources
+D:\Projetos\Feevale\FeevasAPI\trabalho1\obj\Debug\trabalho1.csproj.GenerateResource.Cache
