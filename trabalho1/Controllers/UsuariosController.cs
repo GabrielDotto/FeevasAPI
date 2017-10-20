@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,28 +8,61 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using trabalho1.Repo;
 
 namespace trabalho1.Models
 {
     public class UsuariosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private LogRepo _logRepo = new LogRepo();
 
         // GET: Usuarios
-        public ActionResult Index()
+        [Authorize(Roles = "Admin")]
+        public ActionResult Index(string user, bool tipoAdmin = false, bool tipoUser = false)
         {
-            return View(db.ApplicationUsers.ToList());
+            var listUser = db.Users.ToList();
+
+            if (!string.IsNullOrWhiteSpace(user))
+            {
+                listUser = listUser.Where(x => x.UserName == user).ToList();
+            }
+
+            if (tipoAdmin)
+            {
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                var role = roleManager.FindByName("Admin");
+
+                if(role != null)
+                {
+                    listUser = listUser.Where(x => x.Roles.Select(r => r.RoleId).Contains(role.Users.First().RoleId)).ToList();
+                }
+            }
+            if(tipoUser)
+            {
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                var role = roleManager.FindByName("User");
+
+                if (role != null)
+                {
+                    listUser = listUser.Where(x => x.Roles.Select(r => r.RoleId).Contains(role.Users.First().RoleId)).ToList();
+                }
+            }
+
+
+
+            return View(listUser);
         }
 
-        //TODO AQUI
+        
         // GET: Usuarios/Details/5
-        public ActionResult Details(string id, string tipoUser)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = db.ApplicationUsers.Find(id);
+            ApplicationUser applicationUser = db.Users.Find(id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
@@ -35,6 +70,7 @@ namespace trabalho1.Models
             return View(applicationUser);
         }
 
+        [Authorize(Roles ="Admin")]
         // GET: Usuarios/Create
         public ActionResult Create()
         {
@@ -50,7 +86,7 @@ namespace trabalho1.Models
         {
             if (ModelState.IsValid)
             {
-                db.ApplicationUsers.Add(applicationUser);
+                db.Users.Add(applicationUser);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -58,6 +94,7 @@ namespace trabalho1.Models
             return View(applicationUser);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Usuarios/Edit/5
         public ActionResult Edit(string id)
         {
@@ -65,7 +102,7 @@ namespace trabalho1.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = db.ApplicationUsers.Find(id);
+            ApplicationUser applicationUser = db.Users.Find(id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
@@ -76,6 +113,7 @@ namespace trabalho1.Models
         // POST: Usuarios/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
@@ -84,19 +122,27 @@ namespace trabalho1.Models
             {
                 db.Entry(applicationUser).State = EntityState.Modified;
                 db.SaveChanges();
+                _logRepo.Create(new Log()
+                {
+                    Usuario = applicationUser,
+                    Acao = "Editado",
+                    Data = DateTime.Now
+                    
+                });
                 return RedirectToAction("Index");
             }
             return View(applicationUser);
         }
 
         // GET: Usuarios/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = db.ApplicationUsers.Find(id);
+            ApplicationUser applicationUser = db.Users.Find(id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
@@ -107,11 +153,22 @@ namespace trabalho1.Models
         // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(string id)
         {
-            ApplicationUser applicationUser = db.ApplicationUsers.Find(id);
-            db.ApplicationUsers.Remove(applicationUser);
+            ApplicationUser applicationUser = db.Users.Find(id);
+
+            _logRepo.Create(new Log()
+            {
+                Usuario = applicationUser,
+                Acao = "Deletado",
+                Data = DateTime.Now
+
+            });
+
+            db.Users.Remove(applicationUser);
             db.SaveChanges();
+          
             return RedirectToAction("Index");
         }
 

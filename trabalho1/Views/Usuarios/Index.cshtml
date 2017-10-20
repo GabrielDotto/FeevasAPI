@@ -6,40 +6,32 @@
 
 <h2>Index</h2>
 
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <label class="input-group">Email: @Html.TextBox("user")</label>
+
+        @*<label class="input-group">Tipo Usuário: @Html.Label("tipoUser")</label>*@
+        <label><input name="Tipoadmin" value="true" type="checkbox" />Admin?</label>
+        <label><input name="TipoUser" value="true" type="checkbox" /> Normal User ?</label>
+        <br />
+
+        <input type="submit" value="Buscar" class="btn-primary" />
+    </div>
+
+}
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmailConfirmed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PasswordHash)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecurityStamp)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LockoutEnabled)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccessFailedCount)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -53,31 +45,7 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EmailConfirmed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PasswordHash)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecurityStamp)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LockoutEnabled)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccessFailedCount)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UserName)

@@ -31,7 +31,5 @@ namespace trabalho1.Models
         }
 
         public System.Data.Entity.DbSet<trabalho1.Models.Log> Logs { get; set; }
-
-        //public System.Data.Entity.DbSet<trabalho1.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

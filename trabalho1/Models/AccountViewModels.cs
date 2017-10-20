@@ -64,6 +64,9 @@ namespace trabalho1.Models
 
     public class RegisterViewModel
     {
+        [Display(Name = "IsAdmin")]
+        public bool isAdmin { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using trabalho1.Models;
+using trabalho1.Repo;
 
 namespace trabalho1.Controllers
 {
@@ -17,7 +18,7 @@ namespace trabalho1.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private LogsController _logController = new LogsController();
+        private LogRepo _logController = new LogRepo();
         public AccountController()
         {
         }
@@ -78,7 +79,15 @@ namespace trabalho1.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
+                
                 case SignInStatus.Success:
+                    var user = UserManager.FindByEmail(model.Email);
+                    _logController.Create(new Log()
+                    {
+                        Acao = "Logou-se",
+                        Usuario = user,
+                        Data = DateTime.Now
+                    });
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -155,13 +164,18 @@ namespace trabalho1.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    UserManager.AddToRole(user.Id, 
+                                          model.isAdmin ? "Admin" : "User");
+                   
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     _logController.Create(new Log() {
                                             Acao = "Registrou-se",
                                             Usuario = user,
                                             Data = DateTime.Now });
 
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                   
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

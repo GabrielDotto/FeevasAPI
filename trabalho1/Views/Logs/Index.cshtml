@@ -1,16 +1,27 @@
 ﻿@model IEnumerable<trabalho1.Models.Log>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Logs";
 }
 
-<h2>Index</h2>
+<h2>Logs Usuários</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@using (Html.BeginForm())
+{
+    if (User.IsInRole("Admin"))
+    {
+        <div class="form-group">
+            <label class="input-group">Email: @Html.TextBox("user")</label>
+            <input type="submit" value="Buscar" class="btn-primary" />
+        </div>
+    }
+}
+
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Acao)
         </th>
@@ -22,16 +33,14 @@
 
 @foreach (var item in Model) {
     <tr>
+        <th>
+            @Html.DisplayFor(modelItem => item.Usuario.UserName)
+        </th>
         <td>
             @Html.DisplayFor(modelItem => item.Acao)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Data)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }
